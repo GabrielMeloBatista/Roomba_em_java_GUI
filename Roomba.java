@@ -1,12 +1,6 @@
 import java.awt.*;
-import java.awt.Component;
-import java.awt.event.*;
-import java.io.File;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
 
 public class Roomba {
     public static void main(String[] args) {
@@ -83,53 +77,106 @@ class Aspirador {
 /**
  * Sala
  */
+
 class Sala extends JPanel {
 
     int QtdLinhas = QtdLinhas();
     int QtdColunas = QtdColunas();
     protected boolean Sala[][] = new boolean[QtdLinhas][QtdColunas];
+    JTable Tabela;
+    DefaultTableModel ModeloTabela;
+    Icon AspiradorPo;
+    Icon Nada;
+    int PosX = 0;// valor precisa ser definido por Aspirador
+    int PosY = 0;// valor precisa ser definido por Aspirador
+    // Sensores
+    JCheckBox Sujeira = new JCheckBox("Sujeira");
+    JCheckBox Parede = new JCheckBox("Parede");
+    //Atuadores
+    JCheckBox Sugador = new JCheckBox("Sugador");
+    JCheckBox Movimento = new JCheckBox("Movimento");
+    JCheckBox Direcao = new JCheckBox("Direção");
+    //Controle
+    JCheckBox Acao = new JCheckBox("ação");
 
     Sala() {
+        Sujeira.setSelected(new SensorSujeira().Ativar(PosY, PosX));
+        Parede.setSelected(new SensorParede().Ativar(PosY, PosX));
+
+        //TODO 
+
+        AspiradorPo = new ImageIcon("Roomba.png");
+        Nada = new ImageIcon("");
+
         setLayout(new BorderLayout());
 
         // Parte da esquerda.
-        JTable Tabuleiro = MontarTabela();
-        add("West", Tabuleiro);
-        JTable Tabela = new JTable(QtdLinhas, QtdColunas);
-        Tabuleiro.add(Tabela);
+        // TODO Colocar imagem na tabela no lugar especificado
+        // MontarTabela();
+        // Tabela.setValueAt(AspiradorPo, PosX, PosY);
+        // add("West", Tabela);
 
         // Parte da direita
         JPanel Luzes = new JPanel();
+
         Luzes.setLayout(new BoxLayout(Luzes, BoxLayout.Y_AXIS));
         add("East", Luzes);
 
         JPanel Sensores = new JPanel();
+
+        Sensores.setLayout(new BoxLayout(Sensores, BoxLayout.Y_AXIS));
+        Sensores.add(Box.createHorizontalStrut(3));
         Sensores.add(new JLabel("Sensores"));
+        Sensores.add(Sujeira);
+        Sensores.add(Parede);
         Luzes.add(Sensores);
-        // TODO Adicionar luzes dos sensores: sujeira e parede
 
         JPanel Atuadores = new JPanel();
+        Atuadores.setLayout(new BoxLayout(Atuadores, BoxLayout.Y_AXIS));
+        Atuadores.add(Box.createHorizontalStrut(4));
         Atuadores.add(new JLabel("Atuadores"));
+        Atuadores.add(Sugador);
+        Atuadores.add(Movimento);
+        Atuadores.add(Direcao);
         Luzes.add(Atuadores);
-        // TODO Adicionar luz dos Atuadores: Sugador, Movimento e direção.
 
         JPanel Controle = new JPanel();
+        Controle.setLayout(new BoxLayout(Controle, BoxLayout.Y_AXIS));
+        Controle.add(Box.createHorizontalStrut(2));
         Controle.add(new JLabel("Controle"));
+        Controle.add(Acao);
         Luzes.add(Controle);
         // TODO Adicionar luz do Controle: Ação.
     }
 
+    // TODO Concertar Erro de imagens repetidas.
     JTable MontarTabela() {
-        JLabel AspiradorPo = new JLabel(new ImageIcon("/images/Roomba.png"));
-        JTable Tabela = new JTable(QtdLinhas, QtdColunas);
+        Tabela = new JTable(QtdLinhas, QtdColunas);
+        ModeloTabela = new DefaultTableModel(QtdLinhas, QtdColunas) {
 
-        //Define o tamanho da celula
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return Icon.class;
+            }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         Tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (int i = 0; i < QtdColunas; i++) {
-            Tabela.getColumnModel().getColumn(i).setPreferredWidth(90);
-        }
+        int TamanhoCelula = 90;
 
-        //TODO colocar imagem na celula
+        TableColumnModel ModeloCelula = Tabela.getColumnModel();
+
+        // Define o tamanho da celula
+        for (int i = 0; i < QtdColunas; i++) {
+            JTableRenderer Renderer = new JTableRenderer();
+            ModeloCelula.getColumn(i).setCellRenderer(Renderer);
+            Tabela.getColumnModel().getColumn(i).setPreferredWidth(TamanhoCelula);
+        }
+        Tabela.setRowHeight(TamanhoCelula);
+
         return Tabela;
     }
 
@@ -150,11 +197,11 @@ class Sala extends JPanel {
     }
 
     int QtdLinhas() {
-        return 6;
+        return 5;
     }
 
     int QtdColunas() {
-        return 6;
+        return 5;
     }
 }
 
@@ -212,14 +259,14 @@ class Porco {
 
 /* protected */ class SensorSujeira {
 
-    Boolean Ativar(int Linha, int Coluna, Sala Sala) {
+    Boolean Ativar(int Linha, int Coluna) {
         return true;
     }
 }
 
 /* protected */ class SensorParede {
 
-    Boolean Ativar(int Linha, int Coluna, Sala Sala) {
+    Boolean Ativar(int Linha, int Coluna) {
         return true;
     }
 }
