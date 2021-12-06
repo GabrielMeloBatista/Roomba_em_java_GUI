@@ -89,6 +89,9 @@ class Sala extends JPanel {
     Icon Nada;
     int PosX = 0;// valor precisa ser definido por Aspirador
     int PosY = 0;// valor precisa ser definido por Aspirador
+    //checkbox
+    Icon Acesa = new ImageIcon("LuzAcesa.png");
+    Icon Apagada = new ImageIcon("LuzApagada.png");
     // Sensores
     JCheckBox Sujeira = new JCheckBox("Sujeira");
     JCheckBox Parede = new JCheckBox("Parede");
@@ -100,10 +103,36 @@ class Sala extends JPanel {
     JCheckBox Acao = new JCheckBox("ação");
 
     Sala() {
+        //coloca a lampada
+        Sujeira.setIcon(Apagada);
+        Sujeira.setSelectedIcon(Acesa);
+        Sujeira.setDisabledIcon(Apagada);
+
+        Parede.setIcon(Apagada);
+        Parede.setSelectedIcon(Acesa);
+        Parede.setDisabledIcon(Apagada);
+
+        Sugador.setIcon(Apagada);
+        Sugador.setSelectedIcon(Acesa);
+        Sugador.setDisabledIcon(Apagada);
+
+        Movimento.setIcon(Apagada);
+        Movimento.setSelectedIcon(Acesa);
+        Movimento.setDisabledIcon(Apagada);
+
+        Direcao.setIcon(Apagada);
+        Direcao.setSelectedIcon(Acesa);
+        Direcao.setDisabledIcon(Apagada);
+        Acao.setIcon(Apagada);
+
+        Acao.setSelectedIcon(Acesa);
+        Acao.setDisabledIcon(Apagada);
+
+
         Sujeira.setSelected(new SensorSujeira().Ativar(PosY, PosX));
         Parede.setSelected(new SensorParede().Ativar(PosY, PosX));
 
-        //TODO 
+        //TODO Acender e apagar sensores sozinhos.
 
         AspiradorPo = new ImageIcon("Roomba.png");
         Nada = new ImageIcon("");
@@ -112,9 +141,9 @@ class Sala extends JPanel {
 
         // Parte da esquerda.
         // TODO Colocar imagem na tabela no lugar especificado
-        // MontarTabela();
-        // Tabela.setValueAt(AspiradorPo, PosX, PosY);
-        // add("West", Tabela);
+        MontarTabela();
+        Tabela.setValueAt(AspiradorPo, PosX, PosY);
+        add("West", Tabela);
 
         // Parte da direita
         JPanel Luzes = new JPanel();
@@ -257,8 +286,8 @@ class Porco {
  * Sensor
  */
 
+//TODO Sensores
 /* protected */ class SensorSujeira {
-
     Boolean Ativar(int Linha, int Coluna) {
         return true;
     }
