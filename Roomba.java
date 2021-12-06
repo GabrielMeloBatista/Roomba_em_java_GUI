@@ -1,18 +1,19 @@
 import java.awt.*;
 import java.awt.Component;
 import java.awt.event.*;
+import java.io.File;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class Roomba {
     public static void main(String[] args) {
-        // TODO Chamar Tela, sim já quero montar direto na tela
-
-        //Colocar o nome da janela
+        // Colocar o nome da janela
         String NomeJanela = "Aspirador";
 
-        //criar a janela e colocar o seu conteudo
+        // criar a janela e colocar o seu conteudo
         GraphicUserInterface a = new GraphicUserInterface(NomeJanela);
     }
 }
@@ -20,10 +21,10 @@ public class Roomba {
 /**
  * GraphicUserInterface
  */
-//Configura a janela, e a posição
+// Configura a janela, e a posição
 class GraphicUserInterface extends JFrame {
     GraphicUserInterface(String Name) {
-        OrganizadorGUI pp = new OrganizadorGUI();
+        Sala pp = new Sala();
         getContentPane().add(pp);
         setTitle(Name);
         setSize(800, 500);
@@ -32,48 +33,10 @@ class GraphicUserInterface extends JFrame {
     }
 }
 
-class OrganizadorGUI extends JPanel {
-//variaveis globais da classe
-
-//construtor
-    OrganizadorGUI(){
-        setLayout(new BorderLayout());
-        //Parte da esquerda.
-        
-        JPanel Tabuleiro = new JPanel();
-        add("West", Tabuleiro);
-        //TODO Montar tabuleiro apartir da Sala
-
-        JTable Tabela = new JTable(6,6);
-        Tabuleiro.add(Tabela);
-
-        //Parte da direita
-        JPanel Luzes = new JPanel();
-        Luzes.setLayout(new BoxLayout(Luzes, BoxLayout.Y_AXIS));
-        add("East", Luzes);
-
-        JPanel Sensores = new JPanel();
-        Sensores.add(new JLabel("Sensores"));
-        Luzes.add(Sensores);
-        //TODO Adicionar luzes dos sensores: sujeira e parede
-
-        JPanel Atuadores = new JPanel();
-        Atuadores.add(new JLabel("Atuadores"));
-        Luzes.add(Atuadores);
-        //TODO Adicionar luz dos Atuadores: Sugador, Movimento e direção.
-        
-        JPanel Controle = new JPanel();
-        Controle.add(new JLabel("Controle"));
-        Luzes.add(Controle);
-        //TODO Adicionar luz do Controle: Ação.
-
-    }
-}
-
 /**
  * Aspirador
  */
-public class Aspirador {
+class Aspirador {
 
     protected int Linha;
     protected int Coluna;
@@ -93,11 +56,11 @@ public class Aspirador {
     }
 
     protected boolean EstaLigado() {
-
+        return false;
     }
 
     protected int QualAcaoRalizar() {
-
+        return 0;
     }
 
     protected void MudarDirecao() {
@@ -105,11 +68,11 @@ public class Aspirador {
     }
 
     protected boolean JaPercorreuTodaSala() {
-
+        return false;
     }
 
     protected boolean Mover(Sala Sala) {
-
+        return true;
     }
 
     void Limpar(Sala Sala) {
@@ -120,14 +83,54 @@ public class Aspirador {
 /**
  * Sala
  */
-public class Sala {
+class Sala extends JPanel {
 
-    protected boolean Sala[][] = new boolean[5][5];
-    int QtdLinhas;
-    int QtdColunas;
+    int QtdLinhas = QtdLinhas();
+    int QtdColunas = QtdColunas();
+    protected boolean Sala[][] = new boolean[QtdLinhas][QtdColunas];
 
     Sala() {
+        setLayout(new BorderLayout());
 
+        // Parte da esquerda.
+        JTable Tabuleiro = MontarTabela();
+        add("West", Tabuleiro);
+        JTable Tabela = new JTable(QtdLinhas, QtdColunas);
+        Tabuleiro.add(Tabela);
+
+        // Parte da direita
+        JPanel Luzes = new JPanel();
+        Luzes.setLayout(new BoxLayout(Luzes, BoxLayout.Y_AXIS));
+        add("East", Luzes);
+
+        JPanel Sensores = new JPanel();
+        Sensores.add(new JLabel("Sensores"));
+        Luzes.add(Sensores);
+        // TODO Adicionar luzes dos sensores: sujeira e parede
+
+        JPanel Atuadores = new JPanel();
+        Atuadores.add(new JLabel("Atuadores"));
+        Luzes.add(Atuadores);
+        // TODO Adicionar luz dos Atuadores: Sugador, Movimento e direção.
+
+        JPanel Controle = new JPanel();
+        Controle.add(new JLabel("Controle"));
+        Luzes.add(Controle);
+        // TODO Adicionar luz do Controle: Ação.
+    }
+
+    JTable MontarTabela() {
+        JLabel AspiradorPo = new JLabel(new ImageIcon("/images/Roomba.png"));
+        JTable Tabela = new JTable(QtdLinhas, QtdColunas);
+
+        //Define o tamanho da celula
+        Tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        for (int i = 0; i < QtdColunas; i++) {
+            Tabela.getColumnModel().getColumn(i).setPreferredWidth(90);
+        }
+
+        //TODO colocar imagem na celula
+        return Tabela;
     }
 
     void Sujar(int Linha, int Coluna) {
@@ -135,7 +138,7 @@ public class Sala {
     }
 
     boolean EstaSujo(int Linha, int Coluna) {
-
+        return false;
     }
 
     void Limpar(int Linha, int Coluna) {
@@ -143,15 +146,15 @@ public class Sala {
     }
 
     boolean EstaNoLimite(int Linha, int Coluna) {
-
+        return false;
     }
 
     int QtdLinhas() {
-
+        return 6;
     }
 
     int QtdColunas() {
-
+        return 6;
     }
 }
 
@@ -168,7 +171,7 @@ class Porco {
 /**
  * Sugador
  */
-protected class Sugador {
+/* protected */ class Sugador {
 
     void Ativar(int Linha, int Coluna, Sala Sala) {
 
@@ -179,25 +182,25 @@ protected class Sugador {
  * Esteira
  */
 
-protected class Norte {
+/* protected */ class Norte {
     void Ativar(int Linha, int Coluna) {
 
     }
 }
 
-protected class Sul {
+/* protected */ class Sul {
     void Ativar(int Linha, int Coluna) {
 
     }
 }
 
-protected class leste {
+/* protected */ class leste {
     void Ativar(int Linha, int Coluna) {
 
     }
 }
 
-protected class Oeste {
+/* protected */ class Oeste {
     void Ativar(int Linha, int Coluna) {
 
     }
@@ -207,16 +210,16 @@ protected class Oeste {
  * Sensor
  */
 
-protected class SensorSujeira {
+/* protected */ class SensorSujeira {
 
     Boolean Ativar(int Linha, int Coluna, Sala Sala) {
-
+        return true;
     }
 }
 
-protected class SensorParede {
+/* protected */ class SensorParede {
 
     Boolean Ativar(int Linha, int Coluna, Sala Sala) {
-
+        return true;
     }
 }
