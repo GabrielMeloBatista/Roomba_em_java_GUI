@@ -1,87 +1,93 @@
 # ROMBA EM JAVA GUI
 
-Este foi um projeto realizado durante as aulas de Programação I (Matriz 2019 de Sistemas de Informação da UEG CCET). O intuito desta atividade foi criar um script em Java, usando Java Swing, para criar uma sala com sujeira esparramada aleatoriamente. Haverá um robô, no caso, um Romba, que irá andar pela sala virtual e limpará a sujeira. Quando esse robô tiver andado por todos os blocos da sala, a execução terminará.
+Este foi um projeto realizado durante as aulas de Programação I (Matriz 2019 de Sistemas de Informação da UEG CCET). O objetivo desta atividade foi criar um script em Java, utilizando Java Swing, para criar uma sala com sujeira esparramada aleatoriamente. Havia um robô, chamado Romba, que se movia pela sala virtual e limpava a sujeira. Quando o robô percorresse todos os blocos da sala, a execução terminaria.
 
-## Porque foi atualizado depois de 3 anos?
+## Por que foi atualizado depois de 3 anos?
 
-Em 2021, quando fiz este projeto, não entendia muito sobre GIT e versionamento. Como fazia muitas alterações no código tentando fazer este código funcionar, acabei fazendo o versionamento manualmente, criando branches separadas para cada alteração.
+Em 2021, quando fiz este projeto, não tinha muito entendimento sobre GIT e versionamento. Como fazia muitas alterações no código tentando fazê-lo funcionar, acabei realizando o versionamento manualmente, criando branches separadas para cada mudança.
 
-Após ter concluído a atividade, fui subir a atividade para o GITHUB e acabei subindo uma versão que tinha alguns bugs que faziam o código não funcionar corretamente.
+Após concluir a atividade, subi o projeto para o GITHUB, mas acabei enviando uma versão com alguns bugs que impediam o código de funcionar corretamente.
 
-Após 4 anos, descobri o problema e, como tinha apagado a solução original, resolvi corrigir os bugs que atrapalhavam a execução.
+Após 4 anos, identifiquei o problema. Como havia perdido a solução original, decidi corrigir os bugs que estavam atrapalhando a execução.
 
 ## Isto é uma IA de Busca?
 
-Infelizmente não. Este sistema não segue uma lógica de busca para seguir o caminho mais curto para a sujeira. Além disso, ele precisa circular toda a sala, e a decisão de caminho é feita aleatoriamente.
+Infelizmente, não. Este sistema não segue uma lógica de busca para seguir o caminho mais curto até a sujeira. Além disso, ele precisa percorrer toda a sala, e a decisão de caminho é feita aleatoriamente.
 
-## Porque um único arquivo? Porque as imagens estão juntas com o arquivo Java?
+## Instruções de uso
 
-Fiz este código no início da minha carreira, naquela época era novo em Java e nem sabia como se fazia isso. Tinha acabado de sair da linguagem C e esta era a forma que eu sabia fazer código.
+Esta branch não utiliza nenhuma framework para facilitar a criação do código e a sua utilização. Algumas coisas precisam ser feitas manualmente.
 
-### Porque você não reorganizou o código?
+A compilação é feita pelo comando `javac` com o seguinte comando:
 
-Quero ter este código como uma memória de como eu melhorei nos últimos tempos. Estou mantendo alguns bugs visuais que este código tinha, além de deixar a pasta bagunçada.
+``javac src/ROOMBA_GUI/AspiradorLogica.java``
 
-### Planos para fazer outra branch que faz esta organização
+Este comando gerará vários arquivos `.class` dentro do código. Existem formas de evitar que esses arquivos sejam gerados na pasta.
 
-Sim, tenho planos no futuro para fazer correções no código.
+Para executar o código, use:
+
+``java src.ROOMBA_GUI.AspiradorLogica``
 
 ---
 
 ## English Translation
 
-This project was created during the Programming I classes (2019 Matrix of Information Systems at UEG CCET). The aim of this activity was to create a Java script using Java Swing to create a room with randomly scattered dirt. There will be a robot, in this case, a Romba, that will walk through the virtual room and clean the dirt. When the robot has walked through all the blocks of the room, the execution will end.
+This was a project done during the Programming I classes (2019 Matrix of Information Systems at UEG CCET). The goal of this activity was to create a Java script using Java Swing to create a room with dirt scattered randomly. There was a robot, named Romba, that would move around the virtual room and clean the dirt. When the robot had covered all the blocks of the room, the execution would finish.
 
 ## Why was it updated after 3 years?
 
-In 2021, when I did this project, I didn't understand much about GIT and versioning. Since I made many changes to the code trying to get it to work, I ended up doing the versioning manually, creating separate branches for each change.
+In 2021, when I did this project, I didn't understand much about GIT and version control. Since I made a lot of changes to the code trying to get it to work, I ended up doing manual version control by creating separate branches for each modification.
 
-After completing the activity, I tried to upload it to GITHUB and ended up uploading a version that had some bugs that caused the code not to work properly.
+After completing the activity, I uploaded the project to GITHUB but ended up uploading a version with some bugs that prevented the code from working properly.
 
-After 4 years, I discovered the problem, and since I had deleted the original solution, I decided to fix the bugs that hindered the execution.
+After 4 years, I identified the problem. Since I had lost the original solution, I decided to fix the bugs that were hindering the execution.
 
 ## Is this a Search AI?
 
-Unfortunately no. This system does not follow a search logic to find the shortest path to the dirt. Additionally, it needs to traverse the entire room, and the path decision is made randomly.
+Unfortunately, no. This system does not follow a search algorithm to take the shortest path to the dirt. Additionally, it has to cover the entire room, and the path decision is made randomly.
 
-## Why a single file? Why are the images bundled with the Java file?
+## Usage Instructions
 
-I wrote this code at the beginning of my career. Back then, I was new to Java and didn’t know how to organize things better. I had just moved from C language and this was the way I knew to write code.
+This branch does not use any framework to facilitate the creation of the code and its usage. Some things need to be done manually.
 
-### Why didn’t you reorganize the code?
+The compilation is done using the `javac` command with the following:
 
-I want to keep this code as a memory of how I’ve improved over time. I’m keeping some visual bugs this code had, as well as leaving the folder messy.
+``javac src/ROOMBA_GUI/AspiradorLogica.java``
 
-### Plans to create another branch that reorganizes the code?
+This command will generate several `.class` files inside the code. There are ways to avoid generating these files within the folder.
 
-Yes, I have plans in the future to fix and reorganize the code.
+To run the code, use:
+
+``java src.ROOMBA_GUI.AspiradorLogica``
 
 ---
 
-## 日本語訳
+## 日本語の翻訳
 
-これは、プログラミングI（UEG CCETの情報システム2019年カリキュラム）の授業で行われたプロジェクトです。この活動の目的は、Java Swingを使用してランダムに散らばった汚れがある部屋を作成するJavaスクリプトを作成することでした。ロボット、つまりRombaが仮想の部屋を歩き、汚れを掃除します。ロボットが部屋のすべてのブロックを歩いたとき、実行が終了します。
+これは、プログラミング I の授業（UEG CCET 情報システム 2019 年度のカリキュラム）で実施されたプロジェクトです。この活動の目的は、Java Swing を使用してランダムに散らばった汚れがある部屋を作成する Java スクリプトを作成することでした。部屋には「ロムバ」というロボットがいて、仮想空間内を動き回り、汚れを掃除します。ロボットが部屋のすべてのブロックを掃除すると、実行が終了します。
 
-## なぜ3年後に更新されたのか？
+## 3年後に更新された理由
 
-2021年にこのプロジェクトを作成したとき、GITやバージョン管理についてあまり理解していませんでした。コードを動かすために多くの変更を加えていたので、変更ごとに別々のブランチを作成して手動でバージョン管理をしていました。
+2021年にこのプロジェクトを作成したとき、GIT やバージョン管理についてあまり理解していませんでした。コードを正常に動作させるために多くの変更を加えたため、各変更ごとに別々のブランチを作成して手動でバージョン管理をしていました。
 
-活動が完了した後、GITHUBにアップロードしようとしたところ、コードが正しく動作しないバグを含んだバージョンをアップロードしてしまいました。
+活動を完了した後、プロジェクトを GITHUB にアップロードしましたが、コードが正しく動作しないバージョンをアップロードしてしまいました。
 
-4年後に問題を発見し、元の解決策を削除していたため、実行に支障をきたしていたバグを修正することに決めました。
+4年後に問題を発見しました。元のソリューションを失っていたため、実行に支障をきたしていたバグを修正することにしました。
 
-## これは探索型AIですか？
+## これは検索アルゴリズムですか？
 
-残念ながら違います。このシステムは汚れに対する最短経路を見つけるための探索ロジックを使用していません。また、部屋全体を循環する必要があり、道の選択はランダムに行われます。
+残念ながら、違います。このシステムは、汚れまでの最短経路を追うための検索アルゴリズムを使用していません。また、部屋全体を移動する必要があり、経路の選択はランダムに行われます。
 
-## なぜ1つのファイルで、画像がJavaファイルと一緒にあるのか？
+## 使用方法
 
-私はキャリアの初期にこのコードを書きました。当時、Javaに不慣れで、どう整理すれば良いのかもわかりませんでした。C言語から移行したばかりで、これが私が知っていたコードの書き方でした。
+このブランチは、コードの作成や利用を簡素化するフレームワークを使用していません。いくつかの操作は手動で行う必要があります。
 
-### なぜコードを整理しなかったのか？
+コンパイルは `javac` コマンドで行い、次のコマンドを使用します：
 
-私はこのコードを、どれだけ改善したかを思い出させるための記録として保持したいと考えています。このコードが持っていた視覚的なバグをいくつか保持し、フォルダを散らかしたままにしています。
+``javac src/ROOMBA_GUI/AspiradorLogica.java``
 
-### 今後、コードを整理するためのブランチを作成する予定はあるか？
+このコマンドは、コード内に複数の `.class` ファイルを生成します。これらのファイルがフォルダ内に生成されるのを防ぐ方法もあります。
 
-はい、将来的にはコードの修正と整理を行う予定です。
+コードを実行するには、次のコマンドを使用します：
+
+``java src.ROOMBA_GUI.AspiradorLogica``
