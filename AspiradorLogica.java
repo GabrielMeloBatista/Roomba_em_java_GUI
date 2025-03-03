@@ -1,14 +1,16 @@
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.util.Random;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
-
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.lang.ProcessHandle.Info;
-import java.util.Random;
 
 interface InterfaceGraficoUI {
 
@@ -69,103 +71,19 @@ class GUI extends GraficoUI {
         setVisible(true);
     }
 
-    protected void Tempo(int ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-        }
-    }
-
-    protected void InitMatrizSujeira(JPanel Sala) {
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                Sujeiras[j][i] = new JLabel(new ImageIcon("rastro.png"));
-                Sujeiras[j][i].setBounds(0 + (i * 64), 0 + (j * 64), 64, 64);
-                Sujeiras[j][i].setVisible(false);
-                Sala.add(Sujeiras[j][i]);
-            }
-        }
-    }
-
-    protected void InitAspirador(JPanel Sala) {
-        Aspirador = new JLabel(new ImageIcon("aspiradorSul.png"));
-        Aspirador.setBounds(0, 0, 64, 64);
-        Sala.add(Aspirador);
-    }
-
-    protected void InitSensores() {
-        JPanel Sensores = new JPanel();
-
-        Sensores.setLayout(new FlowLayout(FlowLayout.LEFT));
-        Sujeira = new JLabel("Sujeira", new ImageIcon("LuzApagada.png"), JLabel.LEFT);
-        Parede = new JLabel("Parede", new ImageIcon("LuzApagada.png"), JLabel.LEFT);
-        Sensores.setBounds(350, 10, 165, 60);
-        Sensores.setBorder(new TitledBorder(new LineBorder(Color.black, 1), "Sensores"));
-        Sensores.add(Sujeira);
-        Sensores.add(Parede);
-        getContentPane().add(Sensores);
-
-    }
-
-    protected void InitAtuadores() {
-        JPanel Atuadores = new JPanel();
-
-        Atuadores.setLayout(new FlowLayout(FlowLayout.LEFT));
-        Mover = new JLabel("Movimento", new ImageIcon("LuzApagada.png"), JLabel.LEFT);
-        Direcao = new JLabel("Direção", new ImageIcon("LuzApagada.png"), JLabel.LEFT);
-        Sugador = new JLabel("Sugador", new ImageIcon("LuzApagada.png"), JLabel.LEFT);
-
-        Atuadores.setBounds(350, 75, 165, 110);
-        Atuadores.setBorder(new TitledBorder(new LineBorder(Color.black, 1), "Atuadores"));
-        Atuadores.add(Sugador);
-        Atuadores.add(Mover);
-        Atuadores.add(Direcao);
-        getContentPane().add(Atuadores);
-
-    }
-
-    protected void InitControle() {
-        JPanel Controle = new JPanel();
-
-        Controle.setLayout(new FlowLayout(FlowLayout.LEFT));
-        Acao = new JLabel("Ação", new ImageIcon("LuzApagada.png"), JLabel.LEFT);
-        Controle.setBounds(350, 190, 165, 60);
-        Controle.setBorder(new TitledBorder(new LineBorder(Color.black, 1), "Controle"));
-        Controle.add(Acao);
-        getContentPane().add(Controle);
-
-    }
-
-    protected void MontarLayout() {
-
-        setLayout(null);
-        Sala = new JPanel();
-        Sala.setLayout(null);
-        Sala.setBounds(10, 10, 320, 320);
-        Sala.setBackground(new Color(224, 248, 227));
-        InitAspirador(Sala);
-        InitMatrizSujeira(Sala);
-        Sala.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
-        getContentPane().add(Sala);
-        InitSensores();
-        InitAtuadores();
-        InitControle();
-
-    }
-
     public void SensorSujeira() {
         Sujeira.setIcon(new ImageIcon("LuzAcesa.png"));
         Tempo(100);
         Sujeira.setIcon(new ImageIcon("LuzApagada.png"));
         Tempo(100);
-    };
+    }
 
     public void SensorParede() {
         Parede.setIcon(new ImageIcon("LuzAcesa.png"));
         Tempo(100);
         Parede.setIcon(new ImageIcon("LuzApagada.png"));
         Tempo(100);
-    };
+    }
 
     public void MoverAspirador(int Linha, int Coluna) {
         Mover.setIcon(new ImageIcon("LuzAcesa.png"));
@@ -225,7 +143,7 @@ class GUI extends GraficoUI {
 
         Mover.setIcon(new ImageIcon("LuzApagada.png"));
         Tempo(100);
-    };
+    }
 
     public void MudarDirecaoAspirador(String Direcao) {
         this.Direcao.setIcon(new ImageIcon("LuzAcesa.png"));
@@ -317,21 +235,21 @@ class GUI extends GraficoUI {
         Tempo(50);
         this.Direcao.setIcon(new ImageIcon("LuzApagada.png"));
         Tempo(500);
-    };
+    }
 
     public void Sugador() {
         Sugador.setIcon(new ImageIcon("LuzAcesa.png"));
         Tempo(100);
         Sugador.setIcon(new ImageIcon("LuzApagada.png"));
         Tempo(100);
-    };
+    }
 
     public void AcaoRealizar() {
         Acao.setIcon(new ImageIcon("LuzAcesa.png"));
         Tempo(100);
         Acao.setIcon(new ImageIcon("LuzApagada.png"));
         Tempo(100);
-    };
+    }
 
     public void MostrarSujeira(int Linha, int Coluna) {
         Tempo(500);
@@ -347,6 +265,90 @@ class GUI extends GraficoUI {
         // Colocar visivel caso não esteja
         Sujeiras[Linha][Coluna].setVisible(true);
         Sujeiras[Linha][Coluna].setIcon(new ImageIcon("branco.png"));
+    }
+
+    protected void Tempo(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+        }
+    };
+
+    protected void InitMatrizSujeira(JPanel Sala) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                Sujeiras[j][i] = new JLabel(new ImageIcon("rastro.png"));
+                Sujeiras[j][i].setBounds(0 + (i * 64), 0 + (j * 64), 64, 64);
+                Sujeiras[j][i].setVisible(false);
+                Sala.add(Sujeiras[j][i]);
+            }
+        }
+    };
+
+    protected void InitAspirador(JPanel Sala) {
+        Aspirador = new JLabel(new ImageIcon("aspiradorSul.png"));
+        Aspirador.setBounds(0, 0, 64, 64);
+        Sala.add(Aspirador);
+    };
+
+    protected void InitSensores() {
+        JPanel Sensores = new JPanel();
+
+        Sensores.setLayout(new FlowLayout(FlowLayout.LEFT));
+        Sujeira = new JLabel("Sujeira", new ImageIcon("LuzApagada.png"), JLabel.LEFT);
+        Parede = new JLabel("Parede", new ImageIcon("LuzApagada.png"), JLabel.LEFT);
+        Sensores.setBounds(350, 10, 165, 60);
+        Sensores.setBorder(new TitledBorder(new LineBorder(Color.black, 1), "Sensores"));
+        Sensores.add(Sujeira);
+        Sensores.add(Parede);
+        getContentPane().add(Sensores);
+
+    };
+
+    protected void InitAtuadores() {
+        JPanel Atuadores = new JPanel();
+
+        Atuadores.setLayout(new FlowLayout(FlowLayout.LEFT));
+        Mover = new JLabel("Movimento", new ImageIcon("LuzApagada.png"), JLabel.LEFT);
+        Direcao = new JLabel("Direção", new ImageIcon("LuzApagada.png"), JLabel.LEFT);
+        Sugador = new JLabel("Sugador", new ImageIcon("LuzApagada.png"), JLabel.LEFT);
+
+        Atuadores.setBounds(350, 75, 165, 110);
+        Atuadores.setBorder(new TitledBorder(new LineBorder(Color.black, 1), "Atuadores"));
+        Atuadores.add(Sugador);
+        Atuadores.add(Mover);
+        Atuadores.add(Direcao);
+        getContentPane().add(Atuadores);
+
+    };
+
+    protected void InitControle() {
+        JPanel Controle = new JPanel();
+
+        Controle.setLayout(new FlowLayout(FlowLayout.LEFT));
+        Acao = new JLabel("Ação", new ImageIcon("LuzApagada.png"), JLabel.LEFT);
+        Controle.setBounds(350, 190, 165, 60);
+        Controle.setBorder(new TitledBorder(new LineBorder(Color.black, 1), "Controle"));
+        Controle.add(Acao);
+        getContentPane().add(Controle);
+
+    };
+
+    protected void MontarLayout() {
+
+        setLayout(null);
+        Sala = new JPanel();
+        Sala.setLayout(null);
+        Sala.setBounds(10, 10, 320, 320);
+        Sala.setBackground(new Color(224, 248, 227));
+        InitAspirador(Sala);
+        InitMatrizSujeira(Sala);
+        Sala.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
+        getContentPane().add(Sala);
+        InitSensores();
+        InitAtuadores();
+        InitControle();
+
     }
 
 }
@@ -366,23 +368,23 @@ class ParametroPorReferencia {
 }
 
 class AdaptadorGUI {
-    /**
-     * Classe adaptadora para a Graphical User Interface
-     */
-
-    protected GUI display;
     protected static AdaptadorGUI instancia = null;
-
-    protected AdaptadorGUI() {
-        display = null;
-    }
-
     public static AdaptadorGUI obterInstancia() {
         if (instancia == null) {
             instancia = new AdaptadorGUI();
         }
 
         return instancia;
+    }
+
+    /**
+     * Classe adaptadora para a Graphical User Interface
+     */
+
+    protected GUI display;
+
+    protected AdaptadorGUI() {
+        display = null;
     }
 
     public void setDisplay(GUI display) {
@@ -461,6 +463,42 @@ class Aspirador {
 
     }
 
+    public void ligar() {
+        interruptor = true;
+    }
+
+    public void limpar(Sala sala) {
+        boolean condicional;
+        initCaminhoPercorrido(sala);
+
+        while (estaLigado()) {
+            if (sensorSujeira.ativar(linha, coluna, sala)) { // Ve se este determinado lugar tem sujeira
+                sugador.ativar(linha, coluna, sala);
+            }
+
+            condicional = false;
+            while (!condicional) {
+                switch (qualAcaoRealizar()) {
+                    case 0:
+                        mudarDirecao();
+                        condicional = true;
+                        break;
+                    case 1:
+                        if (mover(sala)) {
+                            // marcarCaminhoPercorrido(); //criar esse método
+                            condicional = true;
+                        }
+                }// fim switch
+            } // fim while (!condicional)
+
+            if (jaPercorreuTodaSala(sala)) {
+                desligar();
+            }
+
+            AdaptadorGUI.obterInstancia().mostrarSala(sala);
+        } // fim while (estaLigado())
+    }
+
     protected void initCaminhoPercorrido(Sala sala) {
         caminho_percorrido = new boolean[sala.qdeLinhas()][sala.qdeColunas()];
 
@@ -486,10 +524,6 @@ class Aspirador {
             }
         }
         return true;
-    }
-
-    public void ligar() {
-        interruptor = true;
     }
 
     protected void desligar() {
@@ -555,38 +589,6 @@ class Aspirador {
 
         return false; // nao conseguiu mover
     }
-
-    public void limpar(Sala sala) {
-        boolean condicional;
-        initCaminhoPercorrido(sala);
-
-        while (estaLigado()) {
-            if (sensorSujeira.ativar(linha, coluna, sala)) { // Ve se este determinado lugar tem sujeira
-                sugador.ativar(linha, coluna, sala);
-            }
-
-            condicional = false;
-            while (!condicional) {
-                switch (qualAcaoRealizar()) {
-                    case 0:
-                        mudarDirecao();
-                        condicional = true;
-                        break;
-                    case 1:
-                        if (mover(sala)) {
-                            // marcarCaminhoPercorrido(); //criar esse método
-                            condicional = true;
-                        }
-                }// fim switch
-            } // fim while (!condicional)
-
-            if (jaPercorreuTodaSala(sala)) {
-                desligar();
-            }
-
-            AdaptadorGUI.obterInstancia().mostrarSala(sala);
-        } // fim while (estaLigado())
-    }
 }
 
 interface Sensor {
@@ -618,28 +620,24 @@ abstract class Esteira {
 class Norte extends Esteira {
     public void ativar(ParametroPorReferencia linha, ParametroPorReferencia coluna) {
         linha.valor--;
-        // super.ativar(linha, coluna);
     }
 }
 
 class Leste extends Esteira {
     public void ativar(ParametroPorReferencia linha, ParametroPorReferencia coluna) {
         coluna.valor++;
-        // ativar(linha, coluna); // ANTES: super.ativar(linha, coluna);
     }
 }
 
 class Sul extends Esteira {
     public void ativar(ParametroPorReferencia linha, ParametroPorReferencia coluna) {
         linha.valor++;
-        // ativar(linha, coluna); // ANTES: super.ativar(linha, coluna);
     }
 }
 
 class Oeste extends Esteira {
     public void ativar(ParametroPorReferencia linha, ParametroPorReferencia coluna) {
         coluna.valor--;
-        // ativar(linha, coluna); // ANTES: super.ativar(linha, coluna);
     }
 }
 
